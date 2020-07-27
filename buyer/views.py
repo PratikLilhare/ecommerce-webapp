@@ -49,4 +49,7 @@ def category(request,id):
 	return render(request,"Category.html",{'categoryProds':CatProduct})
 
 def deleteProduct(request,id):
-	pass
+	uObj = UserProfile.objects.get(user__username = request.user)
+	cartObj = Cart.objects.get(product_id = id,user_id = uObj)
+	cartObj.delete()
+	return redirect("/buyer/view_cart/")
