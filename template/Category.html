@@ -1,0 +1,25 @@
+{% extends "homepage.html" %}
+
+
+{% block maincontent %}
+
+{% for i in categoryProds %}
+<div class="col-lg-4 col-md-6 mb-4">
+    <div class="card h-100">
+      <a href="#"><img class="card-img-top" src="{{ i.pic.url }}" alt=""></a>
+      <div class="card-body">
+        <h4 class="card-title">
+          <a href="#">{{ i.pname }}</a>
+        </h4>
+        <h5>{{ i.price }}</h5>
+        <p class="card-text">{{ i.desc }}</p>
+      </div>
+      <div class="card-footer">
+          <p class="card-text">Seller: </p>
+        <a href="{% url 'buyer:cart' id=i.id %}">Add to Cart</a>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}

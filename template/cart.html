@@ -1,0 +1,23 @@
+{% extends 'homepage.html' %}
+
+
+
+{% block maincontent %}
+<br><br>
+{% for i in p %}
+<div class="col-lg-4 col-md-6 mb-4">
+    <div class="card h-100">
+      <a href="#"><img class="card-img-top" src="{{ i.pic.url }}"     alt=""></a>
+      <div class="card-body">
+        <h4 class="card-title">
+          <a href="#">{{ i.pname }}</a>
+        </h4>
+        <h5>{{ i.price }}</h5>
+        <a href="{% url "buyer:delete_product" id=i.id %}"><h5>delete</h5></a>
+      </div>
+      <div class="card-footer">
+      </div>
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}
