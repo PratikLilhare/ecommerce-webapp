@@ -8,3 +8,7 @@ class Cart(models.Model):
         unique_together = ('user','product')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user =models.ForeignKey(UserProfile,on_delete=models.CASCADE)
+
+class Profile(models.Model):
+    user = models.ForeignKey(UserProfile,on_delete=models.CASCADE)
+    address = models.TextField()

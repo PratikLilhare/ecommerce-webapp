@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from seller.models import Product, Category
 from ecommerceProject.models import UserProfile
-from .models import Cart
+from .models import Cart,Profile
 from django.db import connection
 
 mycursor = connection.cursor()
@@ -53,3 +53,19 @@ def deleteProduct(request,id):
 	cartObj = Cart.objects.get(product_id = id,user_id = uObj)
 	cartObj.delete()
 	return redirect("/buyer/view_cart/")
+
+def profile(request):
+	uobj = UserProfile.objects.get(user__username = request.user)
+	if request.method == "POST":
+		address = request.POST['address']
+		try:
+			p = Profile.objects.get(user_id = uobj.id)
+			p.address = address
+			p.save()		
+		except:
+			p = Profile(address = address,user_id = uobj.id)
+			p.save()
+	#else:
+	#	p = Profile.objects.get(user_id = uobj.id)
+	#	return render(request,"Profile.html",{'address':p.address})
+	return render(request,"Profile.html")

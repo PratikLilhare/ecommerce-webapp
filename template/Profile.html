@@ -1,0 +1,14 @@
+{% extends 'homepage.html' %}
+
+
+{% block maincontent %}
+<br><br><br>
+{{ request.user }}
+<form method='POST'>
+    {% csrf_token %}
+    <input type ="text" name="address" placeholder = {{ address }}>
+    <input type="submit" name= "Update">
+</form>
+
+
+{% endblock %}
